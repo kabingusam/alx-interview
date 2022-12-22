@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # program to print pascal's triangle
 
 def pascal_triangle(n):
