@@ -1,7 +1,10 @@
 #!/usr/bin/python3
-# program to print pascal's triangle
+'''program to print pascal's triangle
+'''
 
 def pascal_triangle(n):
+    '''the function returns a list of lists of integers representing the Pascal’s triangle
+    '''
     triangle = []
     for i in range(n):
         if i == 0:
