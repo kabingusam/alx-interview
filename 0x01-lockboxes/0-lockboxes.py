@@ -3,6 +3,8 @@
 ''' 
 
 def canUnlockAll(boxes):
+    '''This a method determines if all the boxes can be opened.
+    '''
     seen = set()
     to_visit = [0]
 
