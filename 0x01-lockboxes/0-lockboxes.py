@@ -3,28 +3,12 @@
 ''' 
 
 def canUnlockAll(boxes):
-    # stores the keys
-    keys = set()
+    seen = set()
+    to_visit = [0]
 
-    # stores boxes to be opened
-    stack = []
-
-    # add first box to stack
-    stack.append(boxes[0])
-
-    # add keys of the first box to the set
-    keys.update(boxes[0])
-
-    while stack:
-        # get box to open
-        box = stack.pop
-
-        # add keys of this box to the set
-        keys.update(boxes)
-
-        # loop through all the boxes
-        for i in range(1, len(boxes)):
-            if i not in keys and i in box:
-                stack.append(boxes[i])
-
-    return len(keys) == len(boxes) 
+    while to_visit:
+        box = to_visit.pop()
+        if box not in seen:
+            seen.add(box)
+            to_visit.extend(boxes[box])
+        return len(seen) == len(boxes)

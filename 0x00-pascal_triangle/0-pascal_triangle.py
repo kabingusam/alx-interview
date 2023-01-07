@@ -2,7 +2,6 @@
 '''program to print pascal's triangle
 '''
 
-
 def pascal_triangle(n):
     '''the function returns a list of lists of integers representing the Pascal's triangle
     '''
