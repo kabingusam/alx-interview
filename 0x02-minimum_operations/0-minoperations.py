@@ -8,10 +8,18 @@ def minOperations(n: int) -> int:
     :param n: the number of Hs we want to reach in the text file
     :return: returns the number of operations needed to reach n Hs, 0 if n <= 1 or n is not int
     '''
-    ans = 0
-    if n <= 1:
+    if n <= 0:
         return 0
-    while n % 2 == 0:
-        n = n // 2
-        ans += 1
-    return ans + 1
+    steps = 0
+    while n > 1:
+        i = 2
+        while i * i <= n:
+            if n % i == 0:
+                n = n // i
+                steps += i
+                break
+            i += 1
+        if i * i > n:
+            n = n - 1
+            steps += 1
+    return steps
