@@ -1,41 +1,46 @@
-#!/usr/bin/python3
-"""stats module
-"""
-from sys import stdin
+import sys
+from signal import signal, SIGINT
 
+# Initialize variables to keep track of metrics
+total_size = 0
+status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+line_count = 0
 
-codes = {'200': 0, '301': 0, '400': 0, '401': 0,
-         '403': 0, '404': 0, '405': 0, '500': 0}
-size = 0
+# Function to handle keyboard interrupt (CTRL + C)
+def handle_interrupt(signal_received, frame):
+    print_metrics()
+    sys.exit(0)
 
+# Function to print metrics
+def print_metrics():
+    print("Total file size:", total_size)
+    for code in sorted(status_codes):
+        if status_codes[code] > 0:
+            print(code, ":", status_codes[code])
 
-def print_info():
-    """print_info method print needed info
-    Args:
-        codes (dict): code status
-        size (int): size of files
-    """
-    print("File size: {}".format(size))
-    for key, val in sorted(codes.items()):
-        if val > 0:
-            print("{}: {}".format(key, val))
+# Register the interrupt handler
+signal(SIGINT, handle_interrupt)
 
-
-if __name__ == '__main__':
-
+# Loop through stdin line by line
+for line in sys.stdin:
+    # Attempt to extract metrics from input line
     try:
-        for i, line in enumerate(stdin, 1):
-            try:
-                info = line.split()
-                size += int(info[-1])
-                if info[-2] in codes.keys():
-                    codes[info[-2]] += 1
-            except:
-                pass
-            
-            if not i % 10:
-                print_info()
-    except KeyboardInterrupt:
-        print_info()
-        raise
-    print_info()
+        ip, date, request, code, size = line.strip().split()
+        code = int(code)
+        size = int(size)
+    except ValueError:
+        # If input line is not in the correct format, skip it
+        continue
+
+    # Update metrics
+    total_size += size
+    if code in status_codes:
+        status_codes[code] += 1
+    line_count += 1
+
+    # Print metrics every 10 lines or on keyboard interrupt
+    if line_count % 10 == 0:
+        print_metrics()
+
+# Print metrics one final time after input stream is exhausted
+print_metrics()
