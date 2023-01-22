@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+'''0-stats.py'''
+
 import sys
 from signal import signal, SIGINT
 
