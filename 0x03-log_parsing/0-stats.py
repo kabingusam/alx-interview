@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+'''0-stats.py
+'''
+
 import sys
 import re
 from collections import defaultdict
