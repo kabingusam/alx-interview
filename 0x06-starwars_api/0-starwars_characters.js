@@ -1,8 +1,8 @@
 #!/usr/bin/node
 
-var request = require('request');
+const request = require('request');
 
-var options = {
+const options = {
     url: 'https://swapi.dev/api/films/1',
     method: 'GET',
     json: true
