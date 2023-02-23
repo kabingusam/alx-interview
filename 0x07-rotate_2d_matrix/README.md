@@ -1,4 +1,6 @@
-#### Matrix Rotation
+#### 0x07. Rotate 2D Matrix
+`Algorithm`
+`Python`
 
 This program rotates an n x n 2D matrix 90 degrees clockwise in place.
 
