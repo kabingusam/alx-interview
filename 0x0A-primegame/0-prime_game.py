@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-'''Prime Game
-'''
+'''Prime Game'''
+
 def isWinner(x, nums):
     """Determines the winner of a prime game session with `x` rounds.
     """
